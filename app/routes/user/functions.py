@@ -31,6 +31,28 @@ def login_user(email, password):
     )
 
 
+def login_user_v2(email, password):
+
+    user: User = User.query.filter_by(email=email).first()
+    if not user or not user.check_password(password=password):
+        abort(
+            HTTPStatus.UNAUTHORIZED,
+            "Invalid Login Details",
+            status=Config.ERROR_STATUS,
+        )
+
+    headers = [("Set-Cookie", f"auth={user.generate_token(True)};path=/")]
+    return (
+        {
+            "status": Config.SUCCESS_STATUS,
+            "message": "User Login Successful",
+            "data": user,
+        },
+        HTTPStatus.ACCEPTED,
+        headers,
+    )
+
+
 def register_user(email, first_name, last_name, password):
     if not first_name:
         abort(

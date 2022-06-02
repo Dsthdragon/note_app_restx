@@ -5,7 +5,7 @@ from app import api
 from app.model import User
 from app.routes import login_required
 from config import Config
-from .functions import get_current_user, login_user, register_user
+from .functions import get_current_user, login_user, login_user_v2, register_user
 from .schemas import (
     register_parser,
     user_response_schema,
@@ -37,11 +37,23 @@ class UserResource(Resource):
 
 @user_name_space.route("/login")
 class UserLoginResource(Resource):
-    @user_name_space.marshal_with(user_response_schema, code=HTTPStatus.ACCEPTED)
+    @user_name_space.marshal_list_with(user_response_schema, code=HTTPStatus.ACCEPTED)
     @user_name_space.expect(login_parser)
     def post(self):
         data = login_parser.parse_args(strict=True)
         return login_user(
+            data.get("email"),
+            data.get("password"),
+        )
+
+
+@user_name_space.route("/login/v2")
+class UserLoginV2Resource(Resource):
+    @user_name_space.marshal_with(user_response_schema, code=HTTPStatus.ACCEPTED)
+    @user_name_space.expect(login_parser)
+    def post(self):
+        data = login_parser.parse_args(strict=True)
+        return login_user_v2(
             data.get("email"),
             data.get("password"),
         )

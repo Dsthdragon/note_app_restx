@@ -109,7 +109,6 @@ class Note(db.Model, JsonSchemaMixin):
     )
     title: str = db.Column(
         String(200),
-        unique=True,
         nullable=False,
     )
     content: str = db.Column(

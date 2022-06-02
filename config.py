@@ -10,7 +10,7 @@ class Config(object):
         os.environ.get("DATABASE_URI")
         or "mysql+pymysql://root:" "@localhost/note_app?charset=utf8mb4"
     )
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     POSTS_PER_PAGE = 10
     SECRET_KEY = "12345678"
     ERROR_404_HELP = False

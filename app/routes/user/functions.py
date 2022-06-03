@@ -17,7 +17,9 @@ def login_user(email, password):
             status=Config.ERROR_STATUS,
         )
 
-    headers = [("Set-Cookie", f"auth={user.generate_token(True)};path=/")]
+    headers = [
+        ("Set-Cookie", f"auth={user.generate_token(True)};path=/;SameSite=None;Secure;")
+    ]
     return (
         (
             {
@@ -41,7 +43,9 @@ def login_user_v2(email, password):
             status=Config.ERROR_STATUS,
         )
 
-    headers = [("Set-Cookie", f"auth={user.generate_token(True)};path=/")]
+    headers = [
+        ("Set-Cookie", f"auth={user.generate_token(True)};path=/;SameSite=None;Secure;")
+    ]
     return (
         {
             "status": Config.SUCCESS_STATUS,

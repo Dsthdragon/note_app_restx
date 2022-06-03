@@ -10,7 +10,7 @@ from config import Config
 
 db: SQLAlchemy = SQLAlchemy()
 migrate: Migrate = Migrate()
-cors: CORS = CORS(supports_credentials=True)
+cors: CORS = CORS()
 api: Api = Api(
     title="My Note Api",
     version="1.0",
@@ -23,7 +23,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     db.init_app(app)
     migrate.init_app(app, db)
-    cors.init_app(app)
+    cors.init_app(app, supports_credentials=True)
     blueprint = Blueprint("api", __name__)
     api.init_app(blueprint)
     app.register_blueprint(blueprint, url_prefix="/api/v1")

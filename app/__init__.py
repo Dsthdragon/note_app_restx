@@ -10,7 +10,7 @@ from config import Config
 
 db: SQLAlchemy = SQLAlchemy()
 migrate: Migrate = Migrate()
-cors: CORS = CORS()
+cors: CORS = CORS(supports_credentials=True)
 api: Api = Api(
     title="My Note Api",
     version="1.0",

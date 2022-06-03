@@ -23,7 +23,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     db.init_app(app)
     migrate.init_app(app, db)
-    cors.init_app(app, supports_credentials=True)
+    cors.init_app(app, supports_credentials=True, resources={r"*": {"origins": "*"}})
     blueprint = Blueprint("api", __name__)
     api.init_app(blueprint)
     app.register_blueprint(blueprint, url_prefix="/api/v1")

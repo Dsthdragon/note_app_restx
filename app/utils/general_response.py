@@ -2,7 +2,7 @@ from flask_restx import fields
 from app import api
 
 general_response_schema = api.model(
-    "General Response",
+    "GeneralResponse",
     {
         "status": fields.String,
         "message": fields.String,
@@ -10,7 +10,7 @@ general_response_schema = api.model(
 )
 
 general_list_response_schema = api.inherit(
-    "General List Response",
+    "GeneralListResponse",
     general_response_schema,
     {
         "has_next": fields.Boolean,

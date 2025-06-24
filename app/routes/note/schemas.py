@@ -26,7 +26,7 @@ note_parser.add_argument(
 )
 
 note_schema = api.model(
-    "Note",
+    "NoteModel",
     {
         "id": fields.Integer,
         "title": fields.String,
@@ -39,7 +39,7 @@ note_schema = api.model(
 )
 
 note_response_schema = api.inherit(
-    "Note Response ",
+    "NoteResponse ",
     general_response_schema,
     {
         "data": fields.Nested(note_schema, skip_none=True),
@@ -47,7 +47,7 @@ note_response_schema = api.inherit(
 )
 
 notes_response_schema = api.inherit(
-    "Notes Response ",
+    "NotesResponse ",
     general_list_response_schema,
     {
         "data": fields.List(fields.Nested(note_schema, skip_none=True)),

@@ -52,7 +52,7 @@ register_parser.add_argument(
 
 
 user_schema = api.model(
-    "User",
+    "UserModel",
     {
         "id": fields.Integer,
         "email": fields.String,
@@ -65,7 +65,7 @@ user_schema = api.model(
 
 
 user_response_schema = api.inherit(
-    "User Response ",
+    "UserResponse ",
     general_response_schema,
     {
         "status": fields.String,
@@ -75,7 +75,7 @@ user_response_schema = api.inherit(
 )
 
 users_response_schema = api.inherit(
-    "Users Response ",
+    "UsersResponse ",
     general_response_schema,
     {
         "status": fields.String,
